@@ -1,7 +1,7 @@
 <?php 
 namespace Patlidator\Constraints;
 
-class NotBlank
+class DateType
 {
     private $options;
     private $message;
@@ -15,15 +15,21 @@ class NotBlank
          
         $this->options = $options;
     }
-    
     public function getMessage(){
         return $this->message;
     }
-    
     public function validate($value){
-        if(empty($value)){
-            return "Campo Requerido";
+        $year = date("Y", strtotime($value));
+        $month = date("m", strtotime($value));
+        $day = date("d", strtotime($value));
+        $isValid= checkdate($month, $day, $year);
+
+        if($isValid === false){
+            $this->errors[] = [
+                "campo" => $field,
+                "valor" => $value,
+                "message" => "Campo inválido."
+            ];
         }
-       
     }
 }

@@ -1,7 +1,7 @@
 <?php 
 namespace Patlidator\Constraints;
 
-class NotBlank
+class NumberType
 {
     private $options;
     private $message;
@@ -15,15 +15,13 @@ class NotBlank
          
         $this->options = $options;
     }
-    
     public function getMessage(){
         return $this->message;
     }
     
     public function validate($value){
-        if(empty($value)){
-            return "Campo Requerido";
+        if(!is_numeric($value)){
+            return "Este campo solo debe contener números";
         }
-       
     }
 }

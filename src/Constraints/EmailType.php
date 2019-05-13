@@ -1,7 +1,7 @@
 <?php 
 namespace Patlidator\Constraints;
 
-class NotBlank
+class EmailType
 {
     private $options;
     private $message;
@@ -15,15 +15,13 @@ class NotBlank
          
         $this->options = $options;
     }
-    
     public function getMessage(){
         return $this->message;
     }
-    
+
     public function validate($value){
-        if(empty($value)){
-            return "Campo Requerido";
+        if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
+            return "Por Favor ingrese un email válido";
         }
-       
     }
 }
