@@ -10,15 +10,6 @@
     private function handleRestriction($field, $value, $restriction){
         if(is_string($restriction)){
             switch ($restriction) {
-                case 'NotBlank':
-                if(!$value){
-                    $this->errors[] = [
-                        "campo" => $field,
-                        "valor" => $value,
-                        "message" => "Campo requerido."
-                    ];
-                }
-                    break;
                 case 'DateTime':
                     $year = date("Y", strtotime($value));
                     $month = date("m", strtotime($value));
