@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace Patlidator\Constraints;
 
 class DateType
@@ -6,25 +6,24 @@ class DateType
     private $options;
     private $message;
     
-    function __construct($options = null)
+    public function __construct($options = null)
     {
-        if($options["message"]){
+        if ($options["message"]) {
             $this->message = $options["message"];
             unset($options["message"]);
         }
          
         $this->options = $options;
     }
-    public function getMessage(){
+    public function getMessage()
+    {
         return $this->message;
     }
-    public function validate($value){
-        $year = date("Y", strtotime($value));
-        $month = date("m", strtotime($value));
-        $day = date("d", strtotime($value));
-        $isValid= checkdate($month, $day, $year);
+    public function validate($value)
+    {
+        $isValid= strtotime($value);
 
-        if($isValid === false){
+        if ($isValid === false) {
             $this->errors[] = [
                 "campo" => $field,
                 "valor" => $value,
